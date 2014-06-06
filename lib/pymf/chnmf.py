@@ -1,9 +1,7 @@
 #!/usr/bin/python
 #
-# Copyright (C) Christian Thurau, 2010. 
-# Licensed under the GNU General Public License (GPL). 
-# http://www.gnu.org/licenses/gpl.txt
-#$Id: chnmf.py 62 2011-07-25 15:28:07Z cthurau $
+# Authors: Christian Thurau
+# License: BSD 3 Clause
 """      
 PyMF Convex Hull Non-negative Matrix Factorization [1]
     
@@ -13,10 +11,6 @@ PyMF Convex Hull Non-negative Matrix Factorization [1]
 [1] C. Thurau, K. Kersting, and C. Bauckhage. Convex Non-Negative Matrix 
 Factorization in the Wild. ICDM 2009.
 """
-
-__version__ = "$Revision: 62 $"
-# $HeadURL: http://pymf.googlecode.com/svn/trunk/lib/pymf/chnmf.py $
-
 import numpy as np
 
 from itertools import combinations

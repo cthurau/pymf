@@ -1,19 +1,12 @@
 #!/usr/bin/python
 #
-# Copyright (C) Christian Thurau, 2010. 
-# Licensed under the GNU General Public License (GPL). 
-# http://www.gnu.org/licenses/gpl.txt
-#$Id: pca.py 62 2011-07-25 15:28:07Z cthurau $
+# Authors: Christian Thurau
+# License: BSD 3 Clause
 """  
 PyMF Principal Component Analysis.
 
     PCA: Class for Principal Component Analysis
 """
-
-__version__ = "$Revision: 62 $"
-# $HeadURL: http://pymf.googlecode.com/svn/trunk/lib/pymf/pca.py $
-
-
 import numpy as np
 
 from nmf import NMF

@@ -1,9 +1,7 @@
 #!/usr/bin/python
 #
-# Copyright (C) Christian Thurau, 2010. 
-# Licensed under the GNU General Public License (GPL). 
-# http://www.gnu.org/licenses/gpl.txt
-#$Id: cur.py 62 2011-07-25 15:28:07Z cthurau $
+# Authors: Christian Thurau
+# License: BSD 3 Clause
 """
 PyMF CUR Decomposition [1]
 
@@ -12,10 +10,6 @@ PyMF CUR Decomposition [1]
 [1] Drineas, P., Kannan, R. and Mahoney, M. (2006), 'Fast Monte Carlo Algorithms III: Computing 
 a Compressed Approixmate Matrix Decomposition', SIAM J. Computing 36(1), 184-206.
 """
-
-__version__ = "$Revision: 62 $"
-# $HeadURL: http://pymf.googlecode.com/svn/trunk/lib/pymf/cur.py $
-
 import numpy as np
 import scipy.sparse
 

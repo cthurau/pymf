@@ -1,9 +1,7 @@
 #!/usr/bin/python
 #
-# Copyright (C) Christian Thurau, 2010. 
-# Licensed under the GNU General Public License (GPL). 
-# http://www.gnu.org/licenses/gpl.txt
-#$Id: cmd.py 62 2011-07-25 15:28:07Z cthurau $
+# Authors: Christian Thurau
+# License: BSD 3 Clause
 """
 PyMF Compact Matrix Decomposition [1]
 
@@ -12,10 +10,6 @@ PyMF Compact Matrix Decomposition [1]
 [1] Sun, J., Xie, Y., Zhang, H. and Faloutsos, C. (2007), Less is More: Compact Matrix Decomposition for Large
 Sparse Graphs, in Proc. SIAM Int. Conf. on Data Mining. 
 """
-
-__version__ = "$Revision: 62 $"
-# $HeadURL: http://pymf.googlecode.com/svn/trunk/lib/pymf/cmd.py $
-
 import numpy as np
 from cur import CUR
 

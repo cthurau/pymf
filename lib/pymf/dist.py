@@ -1,9 +1,7 @@
 #!/usr/bin/python
 #
-# Copyright (C) Christian Thurau, 2010. 
-# Licensed under the GNU General Public License (GPL). 
-# http://www.gnu.org/licenses/gpl.txt
-#$Id: dist.py 62 2011-07-25 15:28:07Z cthurau $
+# Authors: Christian Thurau
+# License: BSD 3 Clause
 """
 PyMF several distance functions
 
@@ -15,10 +13,6 @@ PyMF several distance functions
     vq(): Vector quantization
     
 """
-
-__version__ = "$Revision: 62 $"
-# $HeadURL: http://pymf.googlecode.com/svn/trunk/lib/pymf/dist.py $
-
 import numpy as np
 import scipy.sparse
 

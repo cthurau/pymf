@@ -1,9 +1,7 @@
 #!/usr/bin/python
 #
-# Copyright (C) Christian Thurau, 2010. 
-# Licensed under the GNU General Public License (GPL). 
-# http://www.gnu.org/licenses/gpl.txt
-#$Id: nmfals.py 62 2011-07-25 15:28:07Z cthurau $
+# Authors: Christian Thurau
+# License: BSD 3 Clause
 """
 PyMF Non-negative Matrix Factorization.
 
@@ -13,11 +11,6 @@ PyMF Non-negative Matrix Factorization.
 [1] Lee, D. D. and Seung, H. S. (1999), Learning the Parts of Objects by Non-negative 
 Matrix Factorization, Nature 401(6755), 788-799.
 """
-
-__version__ = "$Revision: 62 $"
-# $HeadURL: http://pymf.googlecode.com/svn/trunk/lib/pymf/nmfals.py $
-
-
 import numpy as np
 from cvxopt import solvers, base
 from nmf import NMF

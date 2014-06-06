@@ -1,9 +1,7 @@
 #!/usr/bin/python2.6
 #
-# Copyright (C) Christian Thurau, 2010. 
-# Licensed under the GNU General Public License (GPL). 
-# http://www.gnu.org/licenses/gpl.txt
-#$Id: greedycur.py 62 2011-07-25 15:28:07Z cthurau $
+# Authors: Christian Thurau
+# License: BSD 3 Clause
 """  
 PyMF CUR-like Sparse Column Based Matrix Reconstruction via Greedy Approximation[1]
 
@@ -14,10 +12,6 @@ Computing a Compressed Approixmate Matrix Decomposition', SIAM J. Computing 36(1
 [2] Ali Civril, Malik Magdon-Ismail. Deterministic Sparse Column Based Matrix
 Reconstruction via Greedy Approximation of SVD. ISAAC'2008.
 """
-
-__version__ = "$Revision: 62 $"
-# $HeadURL: http://pymf.googlecode.com/svn/trunk/lib/pymf/greedycur.py $
-
 import numpy as np
 from greedy import GREEDY
 from cur import CUR

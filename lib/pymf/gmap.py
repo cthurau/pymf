@@ -1,25 +1,18 @@
 #!/usr/bin/python
 #
-# Copyright (C) Christian Thurau, 2010. 
-# Licensed under the GNU General Public License (GPL). 
-# http://www.gnu.org/licenses/gpl.txt
-#$Id: gmap.py 62 2011-07-25 15:28:07Z cthurau $
+# Authors: Christian Thurau
+# License: BSD 3 Clause
 """ 
 PyMF Geometric-Map
 
     GMAP: Class for Geometric-Map
 """
-
-__version__ = "$Revision: 62 $"
-# $HeadURL: http://pymf.googlecode.com/svn/trunk/lib/pymf/gmap.py $
-
 import scipy.sparse
 import numpy as np
 
 from dist import *
 from aa import AA
 from nmf import NMF
-#from pca import PCA
 from svd import pinv
 from kmeans import Kmeans
 

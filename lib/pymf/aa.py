@@ -1,9 +1,7 @@
 #!/usr/bin/python
 #
-# Copyright (C) Christian Thurau, 2010.
-# Licensed under the GNU General Public License (GPL).
-# http://www.gnu.org/licenses/gpl.txt
-#$Id: aa.py 62 2011-07-25 15:28:07Z cthurau $
+# Authors: Christian Thurau
+# License: BSD 3 Clause
 """
 PyMF Archetypal Analysis [1]
 
@@ -12,10 +10,6 @@ PyMF Archetypal Analysis [1]
 [1] Cutler, A. Breiman, L. (1994), "Archetypal Analysis", Technometrics 36(4), 
 338-347.
 """
-
-__version__ = "$Revision: 62 $"
-# $HeadURL: http://pymf.googlecode.com/svn/trunk/lib/pymf/aa.py $
-
 import numpy as np
 from cvxopt import solvers, base
 

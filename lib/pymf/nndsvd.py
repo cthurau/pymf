@@ -1,9 +1,7 @@
 #!/usr/bin/python
 #
-# Copyright (C) Christian Thurau, 2010.
-# Licensed under the GNU General Public License (GPL).
-# http://www.gnu.org/licenses/gpl.txt
-#$Id: nndsvd.py 62 2011-07-25 15:28:07Z cthurau $
+# Authors: Christian Thurau
+# License: BSD 3 Clause
 """
 PyMF Non-negative Double Singular Value Decompositions.
 
@@ -12,10 +10,6 @@ PyMF Non-negative Double Singular Value Decompositions.
 [1] C. Boutsidis and E. Gallopoulos (2008), SVD based initialization: A head
 start for nonnegative matrix factorization, Pattern Recognition, 41, 1350-1362
 """
-
-__version__ = "$Revision: 62 $"
-# $HeadURL: http://pymf.googlecode.com/svn/trunk/lib/pymf/nndsvd.py $
-
 import numpy as np
 
 from nmf import NMF

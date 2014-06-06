@@ -1,9 +1,7 @@
 #!/usr/bin/python2.6
 #
-# Copyright (C) Christian Thurau, 2010. 
-# Licensed under the GNU General Public License (GPL). 
-# http://www.gnu.org/licenses/gpl.txt
-#$Id: greedy.py 62 2011-07-25 15:28:07Z cthurau $
+# Authors: Christian Thurau
+# License: BSD 3 Clause
 """ 
 PyMF GREEDY[1]
 
@@ -13,10 +11,6 @@ PyMF GREEDY[1]
 [1] Ali Civril, Malik Magdon-Ismail. Deterministic Sparse Column Based Matrix
 Reconstruction via Greedy Approximation of SVD. ISAAC'2008.
 """
-
-__version__ = "$Revision: 62 $"
-# $HeadURL: http://pymf.googlecode.com/svn/trunk/lib/pymf/greedy.py $
-
 import time
 import scipy.sparse
 import numpy as np
