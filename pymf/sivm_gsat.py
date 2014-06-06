@@ -1,5 +1,3 @@
-#!/usr/bin/python2.6
-#
 # Authors: Christian Thurau
 # License: BSD 3 Clause
 """ 
@@ -176,7 +174,9 @@ class SIVM_GSAT(SIVM):
             else:                
                 self._logger.info('Iteration ' + str(i+1) + '/' + str(niter))
 
-                  
+def _test():
+    import doctest
+    doctest.testmod()
+ 
 if __name__ == "__main__":
-    import doctest  
-    doctest.testmod()    
+    _test()

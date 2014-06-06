@@ -1,5 +1,3 @@
-#!/usr/bin/python
-#
 # Authors: Christian Thurau
 # License: BSD 3 Clause
 """
@@ -12,11 +10,11 @@ PyMF Non-negative Matrix Factorization.
 Matrix Factorization, Nature 401(6755), 788-799.
 """
 import scipy.optimize
-from nmf import NMF
+from base import PyMFBase
 
 __all__ = ["NMFNNLS"]
 
-class NMFNNLS(NMF):
+class NMFNNLS(PyMFBase):
     """      
     NMFNNLS(data, num_bases=4)
     
@@ -74,3 +72,10 @@ class NMFNNLS(NMF):
             self.W[i,:] = scipy.optimize.nnls(self.H.T, self.data[i,:].T)[0]
                 
         map(updatesingleW, xrange(self._data_dimension))
+
+def _test():
+    import doctest
+    doctest.testmod()
+ 
+if __name__ == "__main__":
+    _test()

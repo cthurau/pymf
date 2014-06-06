@@ -1,5 +1,3 @@
-#!/usr/bin/python
-#
 # Authors: Christian Thurau
 # License: BSD 3 Clause
 """
@@ -9,11 +7,11 @@ Copyright (C) Christian Thurau, 2010. GNU General Public License (GPL).
 import numpy as np
 
 import dist
-from nmf import NMF
+from base import PyMFBase
 
 __all__ = ["Cmeans"]
 
-class Cmeans(NMF):
+class Cmeans(PyMFBase):
     """      
     cmeans(data, num_bases=4)
     
@@ -47,7 +45,6 @@ class Cmeans(NMF):
     >>> from cmeans import Cmeans
     >>> data = np.array([[1.0, 0.0, 2.0], [0.0, 1.0, 1.0]])
     >>> cmeans_mdl = Cmeans(data, num_bases=2, niter=10)
-    >>> cmeans_mdl.initialization()
     >>> cmeans_mdl.factorize()
     
     The basis vectors are now stored in cmeans_mdl.W, the coefficients in cmeans_mdl.H. 
@@ -55,9 +52,8 @@ class Cmeans(NMF):
     to cmeans_mdl.W, and set compute_w to False:
     
     >>> data = np.array([[1.5], [1.2]])
-    >>> W = [[1.0, 0.0], [0.0, 1.0]]
+    >>> W = np.array([[1.0, 0.0], [0.0, 1.0]])
     >>> cmeans_mdl = Cmeans(data, num_bases=2)
-    >>> cmeans_mdl.initialization()
     >>> cmeans_mdl.W = W
     >>> cmeans_mdl.factorize(compute_w=False, niter=50)
     
@@ -80,3 +76,10 @@ class Cmeans(NMF):
         for i in range(self._num_bases):
             tmp = (self.H[i:i+1,:] * self.data).sum(axis=1)
             self.W[:,i] = tmp/(self.H[i,:].sum() + self._EPS)        
+
+def _test():
+    import doctest
+    doctest.testmod()
+ 
+if __name__ == "__main__":
+    _test()

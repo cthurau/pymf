@@ -1,5 +1,3 @@
-#!/usr/bin/python
-#
 # Authors: Christian Thurau
 # License: BSD 3 Clause
 """ 
@@ -134,8 +132,6 @@ class SIVM(AA):
         self.H = np.zeros((self._num_bases, self._num_samples))
         
     def init_w(self):        
-        print "dd:", self._data_dimension
-        print "nd:", self._num_bases
         self.W = np.zeros((self._data_dimension, self._num_bases))
         
     def init_sivm(self):
@@ -222,7 +218,10 @@ class SIVM(AA):
         AA.factorize(self, niter=1, show_progress=show_progress, 
                   compute_w=compute_w, compute_h=compute_h, 
                   compute_err=compute_err)
-             
+
+def _test():
+    import doctest
+    doctest.testmod()
+ 
 if __name__ == "__main__":
-    import doctest  
-    doctest.testmod()    
+    _test()

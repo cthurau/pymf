@@ -1,5 +1,3 @@
-#!/usr/bin/python
-#
 # Authors: Christian Thurau
 # License: BSD 3 Clause
 """
@@ -12,12 +10,13 @@ start for nonnegative matrix factorization, Pattern Recognition, 41, 1350-1362
 """
 import numpy as np
 
-from nmf import NMF
+from base import PyMFBase
 from svd import SVD
+from nmf import NMF
 
 __all__ = ["NNDSVD"]
 
-class NNDSVD(NMF):
+class NNDSVD(PyMFBase):
     """
     NNDSVD(data, num_bases=4)
 
@@ -46,6 +45,7 @@ class NNDSVD(NMF):
     Applying NNDSVD to some rather stupid data set:
 
     >>> import numpy as np
+    >>> from nmf import NMF
     >>> data = np.array([[1.0, 0.0, 2.0], [0.0, 1.0, 1.0]])
     >>> nndsvd_mdl = NNDSVD(data, num_bases=2)
     >>> nndsvd_mdl.factorize()
@@ -110,6 +110,11 @@ class NNDSVD(NMF):
         NMF.factorize(self, niter=1, show_progress=show_progress, 
                   compute_w=True, compute_h=True, compute_err=compute_err)
 
-if __name__ == "__main__":
+ 
+
+def _test():
     import doctest
     doctest.testmod()
+ 
+if __name__ == "__main__":
+    _test()

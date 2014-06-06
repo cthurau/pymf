@@ -1,5 +1,3 @@
-#!/usr/bin/python
-#
 # Authors: Christian Thurau
 # License: BSD 3 Clause
 """      
@@ -213,8 +211,10 @@ class CHNMF(AA):
         AA.factorize(self, niter=1, show_progress=show_progress, 
                   compute_w=compute_w, compute_h=compute_h, 
                   compute_err=compute_err)        
-        
-        
+
+def _test():
+    import doctest
+    doctest.testmod()
+ 
 if __name__ == "__main__":
-    import doctest  
-    doctest.testmod()    
+    _test()

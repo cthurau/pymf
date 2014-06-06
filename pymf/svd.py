@@ -1,5 +1,3 @@
-#!/usr/bin/python
-#
 # Authors: Christian Thurau
 # License: BSD 3 Clause
 """  
@@ -63,7 +61,7 @@ class SVD():
     -------
     >>> import numpy as np
     >>> data = np.array([[1.0, 0.0, 2.0], [0.0, 1.0, 1.0]])
-    >>> svd_mdl = SVD(data, show_progress=False)    
+    >>> svd_mdl = SVD(data)    
     >>> svd_mdl.factorize()
     """
     
@@ -173,10 +171,7 @@ class SVD():
                     k = self._k
                 else:
                     k = self.data.shape[0]-1
-                if scipy.version.version == '0.9.0':
-                    values, u_vectors = linalg.eigsh(AA,k=k)
-                else:
-                    values, u_vectors = linalg.eigen_symmetric(AA,k=k)
+                values, u_vectors = linalg.eigsh(AA,k=k)
             else:                
                 values, u_vectors = eigh(AA.todense())
             
@@ -215,11 +210,7 @@ class SVD():
                 else:
                     k = self.data.shape[1]-1
                 
-                if scipy.version.version == '0.9.0':                    
-                    values, v_vectors = linalg.eigsh(AA,k=k)                    
-                else:
-                    values, v_vectors = linalg.eigen_symmetric(AA,k=k)
-                                    
+                values, v_vectors = linalg.eigsh(AA,k=k)                    
             else:                
                 values, v_vectors = eigh(AA.todense())    
            
@@ -257,7 +248,10 @@ class SVD():
                 _sparse_right_svd()
             else:            
                 _right_svd()
-            
+
+def _test():
+    import doctest
+    doctest.testmod()
+ 
 if __name__ == "__main__":
-    import doctest  
-    doctest.testmod()    
+    _test()

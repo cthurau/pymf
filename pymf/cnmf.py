@@ -1,5 +1,3 @@
-#!/usr/bin/python
-#
 # Authors: Christian Thurau
 # License: BSD 3 Clause
 """      
@@ -13,13 +11,13 @@ IEEE Trans. on Pattern Analysis and Machine Intelligence 32(1), 45-55.
 
 import numpy as np
 import logging
-from nmf import NMF
 from kmeans import Kmeans
+from base import PyMFBase
 
 
 __all__ = ["CNMF"]
 
-class CNMF(NMF):
+class CNMF(PyMFBase):
     """      
     CNMF(data, num_bases=4)
     
@@ -184,6 +182,9 @@ class CNMF(NMF):
                     self.ferr = self.ferr[:i]                    
                     break
 
+def _test():
+    import doctest
+    doctest.testmod()
+ 
 if __name__ == "__main__":
-    import doctest  
-    doctest.testmod()    
+    _test()

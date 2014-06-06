@@ -1,5 +1,3 @@
-#!/usr/bin/python
-#
 # Authors: Christian Thurau
 # License: BSD 3 Clause
 """  
@@ -88,7 +86,9 @@ class SIVM_CUR(CUR):
                                     
         self.computeUCR()
 
-
+def _test():
+    import doctest
+    doctest.testmod()
+ 
 if __name__ == "__main__":
-    import doctest  
-    doctest.testmod()                    
+    _test()

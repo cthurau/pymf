@@ -1,5 +1,3 @@
-#!/usr/bin/python
-#
 # Authors: Christian Thurau
 # License: BSD 3 Clause
 """
@@ -125,3 +123,10 @@ def vq(A, B, metric='l2'):
     # returns an index list [assume n column vectors, d x n]
     assigned = np.argmin(pdist(A,B, metric=metric), axis=0)
     return assigned
+
+def _test():
+    import doctest
+    doctest.testmod()
+ 
+if __name__ == "__main__":
+    _test()

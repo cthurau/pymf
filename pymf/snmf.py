@@ -1,5 +1,3 @@
-#!/usr/bin/python
-#
 # Authors: Christian Thurau
 # License: BSD 3 Clause
 """  
@@ -11,11 +9,11 @@ PyMF Semi Non-negative Matrix Factorization.
 IEEE Trans. on Pattern Analysis and Machine Intelligence 32(1), 45-55. 
 """
 import numpy as np
-from nmf import NMF
+from base import PyMFBase
 
 __all__ = ["SNMF"]
 
-class SNMF(NMF):
+class SNMF(PyMFBase):
     """      
     SNMF(data, num_bases=4)
     
@@ -84,7 +82,10 @@ class SNMF(NMF):
         H2 = (XW_neg + np.dot(self.H.T,WW_pos)).T + 10**-9
         
         self.H *= np.sqrt(H1/H2)    
-    
+
+def _test():
+    import doctest
+    doctest.testmod()
+ 
 if __name__ == "__main__":
-    import doctest  
-    doctest.testmod()            
+    _test()

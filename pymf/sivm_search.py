@@ -1,5 +1,3 @@
-#!/usr/bin/python2.6
-#
 # Authors: Christian Thurau
 # License: BSD 3 Clause
 """ 
@@ -152,6 +150,9 @@ class SIVM_SEARCH(SIVM):
         self.select = list(next_sel)
         self.W = self.data[:, self.select] 
 
+def _test():
+    import doctest
+    doctest.testmod()
+ 
 if __name__ == "__main__":
-    import doctest  
-    doctest.testmod()    
+    _test()

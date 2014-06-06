@@ -1,5 +1,3 @@
-#!/usr/bin/python
-#
 # Authors: Christian Thurau
 # License: BSD 3 Clause
 """
@@ -49,7 +47,7 @@ class CUR(SVD):
     >>> import numpy as np
     >>> from cur import CUR
     >>> data = np.array([[1.0, 0.0, 2.0], [0.0, 1.0, 1.0]])
-    >>> cur_mdl = CUR(data, show_progress=False, rrank=1, crank=2)    
+    >>> cur_mdl = CUR(data, rrank=1, crank=2)    
     >>> cur_mdl.factorize()
     """
     
@@ -133,8 +131,11 @@ class CUR(SVD):
         self._ccnt = np.ones(len(self._cid))    
                                     
         self.computeUCR()
-    
 
+
+def _test():
+    import doctest
+    doctest.testmod()
+ 
 if __name__ == "__main__":
-    import doctest  
-    doctest.testmod()                
+    _test()

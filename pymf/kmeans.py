@@ -1,5 +1,3 @@
-#!/usr/bin/python
-#
 # Authors: Christian Thurau
 # License: BSD 3 Clause
 """
@@ -9,11 +7,11 @@ import numpy as np
 import random
 
 import dist
-from nmf import NMF
+from base import PyMFBase
 
 __all__ = ["Kmeans"]
 
-class Kmeans(NMF):
+class Kmeans(PyMFBase):
     """      
     Kmeans(data, num_bases=4)
     
@@ -49,7 +47,7 @@ class Kmeans(NMF):
     to kmeans_mdl.W, and set compute_w to False:
     
     >>> data = np.array([[1.5], [1.2]])
-    >>> W = [[1.0, 0.0], [0.0, 1.0]]
+    >>> W = np.array([[1.0, 0.0], [0.0, 1.0]])
     >>> kmeans_mdl = Kmeans(data, num_bases=2)
     >>> kmeans_mdl.W = W
     >>> kmeans_mdl.factorize(niter=1, compute_w=False)
@@ -82,3 +80,10 @@ class Kmeans(NMF):
             n = len(idx)        
             if n > 1:
                 self.W[:,i] = np.sum(self.data[:,idx], axis=1)/n
+
+def _test():
+    import doctest
+    doctest.testmod()
+ 
+if __name__ == "__main__":
+    _test()

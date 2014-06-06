@@ -1,5 +1,3 @@
-#!/usr/bin/python
-#
 # Authors: Christian Thurau
 # License: BSD 3 Clause
 """  
@@ -9,13 +7,13 @@ PyMF Principal Component Analysis.
 """
 import numpy as np
 
-from nmf import NMF
+from base import PyMFBase
 from svd import SVD
 
 
 __all__ = ["PCA"]
 
-class PCA(NMF):
+class PCA(PyMFBase):
     """      
     PCA(data, num_bases=4, center_mean=True)
     
@@ -64,7 +62,7 @@ class PCA(NMF):
         
     def __init__(self, data, num_bases=0, center_mean=True,  **kwargs):
 
-        NMF.__init__(self, data, num_bases=num_bases)
+        PyMFBase.__init__(self, data, num_bases=num_bases)
         
         # center the data around the mean first
         self._center_mean = center_mean            
@@ -126,11 +124,13 @@ class PCA(NMF):
             .ferr : Frobenius norm |data-WH|.
         """
         
-        NMF.factorize(self, niter=1, show_progress=show_progress, 
+        PyMFBase.factorize(self, niter=1, show_progress=show_progress, 
                   compute_w=compute_w, compute_h=compute_h, 
                   compute_err=compute_err)
-                  
-                  
+
+def _test():
+    import doctest
+    doctest.testmod()
+ 
 if __name__ == "__main__":
-    import doctest  
-    doctest.testmod()        
+    _test()

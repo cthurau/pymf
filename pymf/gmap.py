@@ -1,5 +1,3 @@
-#!/usr/bin/python
-#
 # Authors: Christian Thurau
 # License: BSD 3 Clause
 """ 
@@ -62,7 +60,7 @@ class GMAP(AA):
     To compute coefficients for an existing set of basis vectors simply copy W 
     to gmap_mdl.W, and set compute_w to False:
     
-    >>> data = np.array([[1.5, 1.3], [1.2, 0.3]])
+    >>> data = np.array([[1.5, 1.3], [1.2, 0.3], [1.0, 0.8]])
     >>> W = np.array([[1.0, 0.0], [0.0, 1.0]])
     >>> gmap_mdl = GMAP(data, num_bases=2)
     >>> gmap_mdl.W = W
@@ -232,7 +230,10 @@ class GMAP(AA):
         AA.factorize(self, niter=1, show_progress=show_progress, 
                   compute_w=compute_w, compute_h=compute_h, 
                   compute_err=compute_err)
-             
+
+def _test():
+    import doctest
+    doctest.testmod()
+ 
 if __name__ == "__main__":
-    import doctest  
-    doctest.testmod()    
+    _test()

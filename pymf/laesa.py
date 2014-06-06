@@ -1,5 +1,3 @@
-#!/usr/bin/python
-#
 # Authors: Christian Thurau
 # License: BSD 3 Clause
 
@@ -78,8 +76,10 @@ class LAESA(SIVM):
         
         # but "unsort" it again to keep the correct order
         self.W = self.W[:, np.argsort(np.argsort(self.select))]    
-                           
-                   
+
+def _test():
+    import doctest
+    doctest.testmod()
+ 
 if __name__ == "__main__":
-    import doctest  
-    doctest.testmod()    
+    _test()

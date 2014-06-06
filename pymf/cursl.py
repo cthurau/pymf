@@ -1,5 +1,3 @@
-#!/usr/bin/python
-#
 # Authors: Christian Thurau
 # License: BSD 3 Clause
 """
@@ -14,7 +12,7 @@ import numpy as np
 import scipy.sparse
 
 from svd import pinv, SVD
-from cmd import CMD
+from cmde import CMD
 
 __all__ = ["CURSL"]
 
@@ -51,7 +49,7 @@ class CURSL(CMD):
     >>> import numpy as np
     >>> from cur import CUR
     >>> data = np.array([[1.0, 0.0, 2.0], [0.0, 1.0, 1.0]])
-    >>> cur_mdl = CURSL(data, show_progress=False, rrank=1, crank=2)    
+    >>> cur_mdl = CURSL(data, rrank=1, crank=2)    
     >>> cur_mdl.factorize()
     """
     
@@ -82,6 +80,12 @@ class CURSL(CMD):
             
         pcol = comp_prob(self.data, self._rrank)
         prow = comp_prob(self.data.transpose(), self._crank)        
-    
         
         return (prow.reshape(-1,1), pcol.reshape(-1,1))  
+
+def _test():
+    import doctest
+    doctest.testmod()
+ 
+if __name__ == "__main__":
+    _test()

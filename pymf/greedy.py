@@ -1,5 +1,3 @@
-#!/usr/bin/python2.6
-#
 # Authors: Christian Thurau
 # License: BSD 3 Clause
 """ 
@@ -15,11 +13,11 @@ import time
 import scipy.sparse
 import numpy as np
 from svd import *
-from nmf import NMF
+from base import PyMFBase
 
 __all__ = ["GREEDY"]
 
-class GREEDY(NMF):
+class GREEDY(PyMFBase):
     """ 
     GREEDYVOL(data, num_bases=4, niter=100, show_progress=True, compW=True)
 
@@ -51,7 +49,7 @@ class GREEDY(NMF):
 
     >>> import numpy as np
     >>> data = np.array([[1.0, 0.0, 2.0], [0.0, 1.0, 1.0]])
-    >>> greedy_mdl = GREEDY(data, num_bases=2, niter=10)
+    >>> greedy_mdl = GREEDY(data, num_bases=2)
     >>> greedy_mdl.factorize()
 
     The basis vectors are now stored in greedy_mdl.W, the coefficients in 
@@ -70,7 +68,7 @@ class GREEDY(NMF):
 
     def __init__(self, data, k=-1, num_bases=4):
         # call inherited method
-        NMF.__init__(self, data, num_bases=num_bases)
+        PyMFBase.__init__(self, data, num_bases=num_bases)
         self._k = k
         if self._k == -1:
             self._k = num_bases
@@ -164,7 +162,10 @@ class GREEDY(NMF):
 
         # "unsort" it again to keep the correct order
         self.W = self.W[:, np.argsort(np.argsort(self.select))]       
-        
-if __name__ == "__main__":
-    import doctest  
+
+def _test():
+    import doctest
     doctest.testmod()
+ 
+if __name__ == "__main__":
+    _test()

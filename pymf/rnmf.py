@@ -1,5 +1,3 @@
-#!/usr/bin/python
-#
 # Authors: Christian Thurau
 # License: BSD 3 Clause
 """
@@ -15,11 +13,11 @@ import logging
 import logging.config
 import scipy.sparse
 
-from nmf import NMF
+from base import PyMFBase
 
 __all__ = ["RNMF"]
 
-class RNMF(NMF):
+class RNMF(PyMFBase):
     """
     RNMF(data, num_bases=4)
 
@@ -111,7 +109,11 @@ class RNMF(NMF):
         W1 = np.abs(W1) - W1
         W1 /= (2.0 * (np.dot(self.W, np.dot(self.H, self.H.T))))
         self.W *= W1           
-    
-if __name__ == "__main__":
+
+
+def _test():
     import doctest
     doctest.testmod()
+ 
+if __name__ == "__main__":
+    _test()

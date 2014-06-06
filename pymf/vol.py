@@ -1,5 +1,3 @@
-#!/usr/bin/python
-#
 # Authors: Christian Thurau
 # License: BSD 3 Clause
 """
@@ -32,3 +30,10 @@ def simplex(d):
     D[1:,:] = d
     vol = np.abs(np.linalg.det(D)) / factorial(d.shape[1] - 1)
     return vol
+
+def _test():
+    import doctest
+    doctest.testmod()
+ 
+if __name__ == "__main__":
+    _test()

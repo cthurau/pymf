@@ -1,5 +1,3 @@
-#!/usr/bin/python
-#
 # Authors: Christian Thurau
 # License: BSD 3 Clause
 """
@@ -14,11 +12,10 @@ import numpy as np
 from cvxopt import solvers, base
 
 from svd import pinv
-from nmf import NMF
-
+from base import PyMFBase
 __all__ = ["AA"]
 
-class AA(NMF):
+class AA(PyMFBase):
     """
     AA(data, num_bases=4)
 
@@ -70,7 +67,7 @@ class AA(NMF):
     >>> aa_mdl = AA(data, num_bases=2)
     >>> aa_mdl.W = W
     >>> aa_mdl.factorize(niter=5, compute_w=False)
-
+    
     The result is a set of coefficients aa_mdl.H, s.t. data = W * aa_mdl.H.
     """
     # set cvxopt options
@@ -129,6 +126,9 @@ class AA(NMF):
 
         self.W = np.dot(self.beta, self.data.T).T
 
-if __name__ == "__main__":
+def _test():
     import doctest
     doctest.testmod()
+ 
+if __name__ == "__main__":
+    _test()

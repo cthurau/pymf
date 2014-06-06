@@ -1,5 +1,3 @@
-#!/usr/bin/python
-#
 # Authors: Christian Thurau
 # License: BSD 3 Clause
 """
@@ -11,11 +9,11 @@ PyMF Binary Matrix Factorization [1]
 Applications. ICDM 2007
 """
 import numpy as np
-from nmf import NMF
+from base import PyMFBase
 
 __all__ = ["BNMF"]
 
-class BNMF(NMF):
+class BNMF(PyMFBase):
     """      
     BNMF(data, data, num_bases=4)
     Binary Matrix Factorization. Factorize a data matrix into two matrices s.t.
@@ -115,10 +113,13 @@ class BNMF(NMF):
         self._lamb_W = 1.0/niter
         self._lamb_H = 1.0/niter  
         
-        NMF.factorize(self, niter=niter, compute_w=compute_w, 
+        PyMFBase.factorize(self, niter=niter, compute_w=compute_w, 
                       compute_h=compute_h, show_progress=show_progress,
                       compute_err=compute_err)
 
+def _test():
+    import doctest
+    doctest.testmod()
+ 
 if __name__ == "__main__":
-    import doctest  
-    doctest.testmod()    
+    _test()

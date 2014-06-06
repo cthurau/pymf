@@ -1,5 +1,3 @@
-#!/usr/bin/python
-#
 # Authors: Christian Thurau
 # License: BSD 3 Clause
 """
@@ -13,11 +11,11 @@ Matrix Factorization, Nature 401(6755), 788-799.
 """
 import numpy as np
 from cvxopt import solvers, base
-from nmf import NMF
+from base import PyMFBase
 
 __all__ = ["NMFALS"]
 
-class NMFALS(NMF):
+class NMFALS(PyMFBase):
     """      
     NMFALS(data, num_bases=4)
     
@@ -91,3 +89,10 @@ class NMFALS(NMF):
         INQb = base.matrix(0.0, (self._num_bases,1))            
 
         map(updatesingleW, xrange(self._data_dimension))
+
+def _test():
+    import doctest
+    doctest.testmod()
+ 
+if __name__ == "__main__":
+    _test()

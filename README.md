@@ -1,20 +1,21 @@
 ## PyMF - Python Matrix Factorization Module
 
 ### What is PyMF?
-Python Matrix Factorization (PyMF) is a module for several constrained/unconstrained matrix factorization (and related) methods (for a brief introduction to factorization of gigantric matrices have a look at a <a href="https://sites.google.com/site/factorizinggiganticmatrices/">tutorial</a> we gave at ECML-PKDD 2011). The module is early alpha and not very well tested on all platforms. It is known to work well on Archlinux, and Ubuntu running Python 2. Windows and Mac should be fine too. If you find any bugs please send an e-mail to cthurau@gmail.com. Please note that it requires cvxopt, and numpy and scipy.
+Python Matrix Factorization (PyMF) is a module for several constrained/unconstrained matrix factorization (and related) methods for both sparse and dense matrrices (for a brief introduction to factorization of gigantric matrices have a look at a <a href="https://sites.google.com/site/factorizinggiganticmatrices/">tutorial</a> we gave at ECML-PKDD 2011). It requires cvxopt, numpy, and scipy.
 
 PyMF currently includes the following methods:
 
-* Non-negative matrix factorization (NMF)
+* Non-negative matrix factorization (NMF) [three different optimizations used]
 * Convex non-negative matrix factorization (CNMF)
 * Semi non-negative matrix factorization (SNMF)
 * Archetypal analysis (AA)
-* Simplex volume maximization (SiVM)
+* Simplex volume maximization (SiVM) [and SiVM for CUR, GSAT, ... ]
 * Convex-hull non-negative matrix factorization (CHNMF)
 * Binary matrix factorization (BNMF)
 * Singular value decomposition (SVD)
 * Principal component analysis (PCA)
 * K-means clustering (Kmeans)
+* C-means clustering (Cmeans)
 * CUR decomposition (CUR)
 * Compaxt matrix decomposition (CMD)
 

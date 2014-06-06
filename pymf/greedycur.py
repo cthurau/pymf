@@ -1,5 +1,3 @@
-#!/usr/bin/python2.6
-#
 # Authors: Christian Thurau
 # License: BSD 3 Clause
 """  
@@ -50,9 +48,8 @@ class GREEDYCUR(CUR):
     >>> import numpy as np
     >>> from greedycur import GREEDYCUR
     >>> data = np.array([[1.0, 0.0, 2.0], [0.0, 1.0, 1.0]])
-    >>> cur_mdl = GREEDYCUR(data, show_progress=False, rrank=1, crank=2)    
+    >>> cur_mdl = GREEDYCUR(data, rrank=1, crank=2)    
     >>> cur_mdl.factorize()
-    """
     '''
 
     def sample(self, A, c):
@@ -74,6 +71,10 @@ class GREEDYCUR(CUR):
         self.computeUCR()
 
 
-if __name__ == "__main__":
-    import doctest  
+
+def _test():
+    import doctest
     doctest.testmod()
+ 
+if __name__ == "__main__":
+    _test()
