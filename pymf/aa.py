@@ -32,7 +32,6 @@ class AA(PyMFBase):
     num_bases: int, optional
         Number of bases to compute (column rank of W and row rank of H).
         4 (default)       
-    
 
     Attributes
     ----------
@@ -74,18 +73,23 @@ class AA(PyMFBase):
     solvers.options['show_progress'] = False
 
     def init_h(self):
+        """ Initialize H s.t. columns sum to 1.
+        """
         self.H = np.random.random((self._num_bases, self._num_samples))     
         self.H /= self.H.sum(axis=0)
             
     def init_w(self):
+        """ Initialize W s.t. beta sums to 1 and W is set to random value.
+        """
         self.beta = np.random.random((self._num_bases, self._num_samples))
         self.beta /= self.beta.sum(axis=0)
         self.W = np.dot(self.beta, self.data.T).T            
         self.W = np.random.random((self._data_dimension, self._num_bases))        
-        
+
     def update_h(self):
         """ alternating least squares step, update H enforcing a convexity
-        constraint """
+        constraint.
+        """
         def update_single_h(i):
             """ compute single H[:,i] """
             # optimize alpha using qp solver from cvxopt
@@ -105,7 +109,8 @@ class AA(PyMFBase):
 
     def update_w(self):
         """ alternating least squares step, update W enforcing a convexity
-        constraint """
+        constraint.
+        """
         def update_single_w(i):
             """ compute single W[:,i] """
             # optimize beta using qp solver from cvxopt
