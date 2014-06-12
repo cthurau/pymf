@@ -67,7 +67,6 @@ class SIVM_SGREEDY(SIVM_SEARCH):
     >>> import numpy as np
     >>> data = np.array([[1.0, 0.0, 2.0], [0.0, 1.0, 1.0]])
     >>> sivm_mdl = SIVM_SGREEDY(data, num_bases=2, niter=10)
-    >>> sivm_mdl.initialization()
     >>> sivm_mdl.factorize()
     
     The basis vectors are now stored in sivm_mdl.W, the coefficients in sivm_mdl.H. 
@@ -77,14 +76,13 @@ class SIVM_SGREEDY(SIVM_SEARCH):
     >>> data = np.array([[1.5, 1.3], [1.2, 0.3]])
     >>> W = np.array([[1.0, 0.0], [0.0, 1.0]])
     >>> sivm_mdl = SIVM_SGREEDY(data, num_bases=2, niter=1, compW=False)
-    >>> sivm_mdl.initialization()
     >>> sivm_mdl.W = W
     >>> sivm_mdl.factorize()
     
     The result is a set of coefficients sivm_mdl.H, s.t. data = W * sivm_mdl.H.
     """
 
-    def update_w(self):        
+    def _update_w(self):        
         # compute distance matrix -> requiresd for the volume
         self.init_sivm()
         next_sel = list([self.select[0]])

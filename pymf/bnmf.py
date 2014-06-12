@@ -71,7 +71,9 @@ class BNMF(PyMFBase):
     _LAMB_INCREASE_W = 1.1 
     _LAMB_INCREASE_H = 1.1    
         
-    def update_h(self):
+    def _update_h(self):
+        """ 
+        """
         H1 = np.dot(self.W.T, self.data[:,:]) + 3.0*self._lamb_H*(self.H**2)
         H2 = np.dot(np.dot(self.W.T,self.W), self.H) + 2*self._lamb_H*(self.H**3) + self._lamb_H*self.H + 10**-9
         self.H *= H1/H2
@@ -79,13 +81,17 @@ class BNMF(PyMFBase):
         self._lamb_W = self._LAMB_INCREASE_W * self._lamb_W
         self._lamb_H = self._LAMB_INCREASE_H * self._lamb_H
 
-    def update_w(self):
+    def _update_w(self):
         W1 = np.dot(self.data[:,:], self.H.T) + 3.0*self._lamb_W*(self.W**2)
         W2 = np.dot(self.W, np.dot(self.H, self.H.T)) + 2.0*self._lamb_W*(self.W**3) + self._lamb_W*self.W  + 10**-9
         self.W *= W1/W2
 
-    def factorize(self, niter=10, compute_w=True, compute_h=True, 
-                  show_progress=False, compute_err=True):
+    def factorize(self, 
+                    niter=10, 
+                    compute_w=True, 
+                    compute_h=True, 
+                    show_progress=False, 
+                    compute_err=True):
         """ Factorize s.t. WH = data
             
             Parameters

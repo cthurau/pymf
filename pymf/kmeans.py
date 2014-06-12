@@ -54,12 +54,12 @@ class Kmeans(PyMFBase):
     
     The result is a set of coefficients kmeans_mdl.H, s.t. data = W * kmeans_mdl.H.
     """        
-    def init_h(self):
+    def _init_h(self):
         # W has to be present for H to be initialized  
         self.H = np.zeros((self._num_bases, self._num_samples))
-        self.update_h()
+        self._update_h()
          
-    def init_w(self):
+    def _init_w(self):
         # set W to some random data samples
         sel = random.sample(xrange(self._num_samples), self._num_bases)
         
@@ -67,19 +67,20 @@ class Kmeans(PyMFBase):
         self.W = self.data[:, np.sort(sel)]        
        
         
-    def update_h(self):                    
+    def _update_h(self):                    
         # and assign samples to the best matching centers
         self.assigned = dist.vq(self.W, self.data)
         self.H = np.zeros(self.H.shape)
         self.H[self.assigned, range(self._num_samples)] = 1.0
                 
                     
-    def update_w(self):            
+    def _update_w(self):            
         for i in range(self._num_bases):
-            idx = np.where(self.assigned==i)[0]
-            n = len(idx)        
-            if n > 1:
-                self.W[:,i] = np.sum(self.data[:,idx], axis=1)/n
+            # cast to bool to use H as an index for data
+            idx = np.array(self.H[i,:], dtype=np.bool)
+            n = np.sum(idx)
+            if n > 0:
+                self.W[:,i] = np.sum(self.data[:, idx], axis=1)/n
 
 def _test():
     import doctest

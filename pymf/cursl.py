@@ -54,7 +54,7 @@ class CURSL(CMD):
     """
     
     def __init__(self, data, k=-1, rrank=0, crank=0):
-        SVD.__init__(self, data, k=k, rrank=rrank, crank=rrank)
+        CMD.__init__(self, data, k=k, rrank=rrank, crank=rrank)
         
     def sample_probability(self):
         def comp_prob(d, k):           

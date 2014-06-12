@@ -123,10 +123,10 @@ class CHNMF(AA):
         if base_sel > self.data.shape[0]:
             self._base_sel = self.data.shape[0]
 
-    def init_h(self):
+    def _init_h(self):
         self.H = np.zeros((self._num_bases, self._num_samples))
         
-    def init_w(self):
+    def _init_w(self):
         self.W = np.zeros((self._data_dimension, self._num_bases))
         
     def _map_w_to_data(self):
@@ -144,7 +144,7 @@ class CHNMF(AA):
         for i, s in enumerate(self._Wmapped_index):
             self.Wmapped[:,i] = self.data[:,s]
             
-    def update_w(self): 
+    def _update_w(self): 
         """ compute new W """
         def select_hull_points(data, n=3):
             """ select data points for pairwise projections of the first n
@@ -166,11 +166,12 @@ class CHNMF(AA):
     
         # determine convex hull data points using either PCA or random
         # projections
-        method = 'randomprojection'
+        method = 'pca'
         if method == 'pca':
             pcamodel = PCA(self.data)        
             pcamodel.factorize(show_progress=False)        
             proj = pcamodel.H
+            print "PROJ", proj.shape
         else:            
             R = np.random.randn(self._base_sel, self._data_dimension)           
             proj = np.dot(R, self.data)
@@ -178,7 +179,7 @@ class CHNMF(AA):
         self._hull_idx = select_hull_points(proj, n=self._base_sel)
         aa_mdl = AA(self.data[:, self._hull_idx], num_bases=self._num_bases)
 
-        # determine W
+        # determine on the subsampled set
         aa_mdl.factorize(niter=50, compute_h=True, compute_w=True, 
                          compute_err=True, show_progress=False)
             

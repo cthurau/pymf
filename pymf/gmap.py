@@ -76,14 +76,13 @@ class GMAP(AA):
         self._robust_map = robust_map
         self._method = method
        
-          
-    def init_h(self):
+    def _init_h(self):
         self.H = np.zeros((self._num_bases, self._num_samples))
         
-    def init_w(self):
+    def _init_w(self):
         self.W = np.zeros((self._data_dimension, self._num_bases))
            
-    def update_h(self):
+    def _update_h(self):
         print self._method
         if self._method == 'pca':
            self.H = np.dot(pinv(self.W), self.data)
@@ -101,7 +100,7 @@ class GMAP(AA):
             self.H = mdl.H.copy()
            
            
-    def update_w(self): 
+    def _update_w(self): 
         """ compute new W """     
         
         def select_next(iterval):
@@ -127,8 +126,6 @@ class GMAP(AA):
                 
             return sel        
                 
-        EPS = 10**-8
-          
         if scipy.sparse.issparse(self.data):
             norm_data = np.sqrt(self.data.multiply(self.data).sum(axis=0))            
             norm_data = np.array(norm_data).reshape((-1))

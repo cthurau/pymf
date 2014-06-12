@@ -17,10 +17,10 @@ class PCA(PyMFBase):
     """      
     PCA(data, num_bases=4, center_mean=True)
     
-    
-    Archetypal Analysis. Factorize a data matrix into two matrices s.t.
+    Principal Component Analysis. Factorize a data matrix into two matrices s.t.
     F = | data - W*H | is minimal. W is set to the eigenvectors of the
-    data covariance.
+    data covariance. PCA used pymf's SVD, thus, it might be more efficient 
+    to use it directly.
     
     Parameters
     ----------
@@ -70,21 +70,21 @@ class PCA(PyMFBase):
         if self._center_mean:
             # copy the data before centering it
             self._data_orig = data            
-            self._meanv = self._data_orig[:,:].mean(axis=1).reshape(data.shape[0],-1)                
+            self._meanv = self._data_orig[:,:].mean(axis=1).reshape(-1,1)                
             self.data = self._data_orig -  self._meanv
         else:
             self.data = data
 
-    def init_h(self):
+    def _init_h(self):
         pass
 
-    def init_w(self):
+    def _init_w(self):
         pass
     
-    def update_h(self):                    
+    def _update_h(self):                    
         self.H = np.dot(self.W.T, self.data[:,:])
         
-    def update_w(self):
+    def _update_w(self):
         # compute eigenvectors and eigenvalues using SVD            
         svd_mdl = SVD(self.data)
         svd_mdl.factorize()

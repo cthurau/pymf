@@ -65,13 +65,8 @@ class CNMF(PyMFBase):
 
     # see .factorize() for the update of W and H
     # -> proper decoupling of W/H not possible ...
-    def update_w(self):
-        pass        
-        
-    def update_h(self):
-        pass
-    
-    def init_h(self):
+      
+    def _init_h(self):
         if not hasattr(self, 'H'):
             # init basic matrices       
             self.H = np.zeros((self._num_bases, self._num_samples))
@@ -98,12 +93,12 @@ class CNMF(PyMFBase):
         if not hasattr(self,'W'):
             self.W = np.dot(self.data[:,:], self.G)
     
-    def init_w(self):
+    def _init_w(self):
         pass
     
     def factorize(self, niter=10, compute_w=True, compute_h=True, 
                   compute_err=True, show_progress=False):
-        """ Factorize s.t. WH = data
+        """ Factorize s.t. WH = data. 
             
             Parameters
             ----------
@@ -127,10 +122,10 @@ class CNMF(PyMFBase):
         """   
         
         if not hasattr(self,'W'):
-               self.init_w()
+               self._init_w()
                
         if not hasattr(self,'H'):
-                self.init_h()              
+                self._init_h()              
         
         def separate_positive(m):
             return (np.abs(m) + m)/2.0 
@@ -172,13 +167,12 @@ class CNMF(PyMFBase):
                                 
             if compute_err:                 
                 self.ferr[i] = self.frobenius_norm()
-                self._logger.info('Iteration ' + str(i+1) + '/' + str(niter) + 
-                ' FN:' + str(self.ferr[i]))
+                self._logger.info('FN: %s (%s/%s)'  %(ferr[i], i+1, niter))
             else:                
-                self._logger.info('Iteration ' + str(i+1) + '/' + str(niter))
+                self._logger.info('Iteration: (%s/%s)'  %(i+1, niter))
 
             if i > 1 and compute_err:
-                if self.converged(i):                    
+                if self._converged(i):                    
                     self.ferr = self.ferr[:i]                    
                     break
 

@@ -57,12 +57,12 @@ class SNMF(PyMFBase):
     """
 
 
-    def update_w(self):
+    def _update_w(self):
         W1 = np.dot(self.data[:,:], self.H.T)
         W2 = np.dot(self.H, self.H.T)    
         self.W = np.dot(W1, np.linalg.inv(W2))
         
-    def update_h(self):
+    def _update_h(self):
         def separate_positive(m):
             return (np.abs(m) + m)/2.0 
         

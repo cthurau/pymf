@@ -18,6 +18,8 @@ __all__ = ["abs_cosine_distance", "kl_divergence", "l1_distance", "l2_distance",
            "weighted_abs_cosine_distance","cosine_distance","vq", "pdist"]
 
 def kl_divergence(d, vec):    
+    """
+    """
     b = vec*(1/d)    
     b = np.where(b>0, np.log(b),0)    
     b = vec * b
@@ -53,7 +55,7 @@ def l2_distance(d, vec):
     if scipy.sparse.issparse(d):
         ret_val = sparse_l2_distance(d, vec)
     else:
-        ret_val = np.sqrt(((d[:,:] - vec)**2).sum(axis=0))
+        ret_val = np.sqrt(((d[:,:] - vec)**2.0).sum(axis=0))
             
     return ret_val.reshape((-1))        
 

@@ -48,7 +48,7 @@ class SIVM_CUR(CUR):
     -------
     >>> import numpy as np
     >>> data = np.array([[1.0, 0.0, 2.0], [0.0, 1.0, 1.0]])
-    >>> sivmcur_mdl = SIVM_CUR(data, show_progress=False, rrank=1, crank=2)    
+    >>> sivmcur_mdl = SIVM_CUR(data, rrank=1, crank=2)    
     >>> sivmcur_mdl.factorize()
     '''
     

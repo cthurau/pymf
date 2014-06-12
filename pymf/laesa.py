@@ -56,7 +56,7 @@ class LAESA(SIVM):
     
     The result is a set of coefficients laesa_mdl.H, s.t. data = W * laesa_mdl.H.
     """
-    def update_w(self):    
+    def _update_w(self):    
         # initialize some of the recursively updated distance measures     
         self.init_sivm()
         distiter = self._distance(self.select[-1])                

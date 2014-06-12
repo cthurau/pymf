@@ -128,13 +128,13 @@ class SIVM(AA):
                 str(idx_end/(self.data.shape[1]/100.0)) + "%")    
         return d
        
-    def init_h(self):
+    def _init_h(self):
         self.H = np.zeros((self._num_bases, self._num_samples))
         
-    def init_w(self):        
+    def _init_w(self):        
         self.W = np.zeros((self._data_dimension, self._num_bases))
         
-    def init_sivm(self):
+    def _init_sivm(self):
         self.select = []
         if self._init == 'fastmap':
             # Fastmap like initialization
@@ -158,9 +158,9 @@ class SIVM(AA):
             self.select = [np.argmax(d)]
         
         
-    def update_w(self): 
+    def _update_w(self): 
         """ compute new W """        
-        self.init_sivm()       
+        self._init_sivm()       
         
         # initialize some of the recursively updated distance measures ....
         d_square = np.zeros((self.data.shape[1]))

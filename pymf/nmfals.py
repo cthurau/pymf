@@ -23,7 +23,7 @@ class NMFALS(PyMFBase):
     Non-negative Matrix Factorization. Factorize a data matrix into two matrices 
     s.t. F = | data - W*H | = | is minimal. H, and W are restricted to non-negative
     data. Uses the an alternating least squares procedure (quite slow for larger
-    data sets)
+    data sets) and cvxopt, similar to aa.
     
     Parameters
     ----------
@@ -60,8 +60,8 @@ class NMFALS(PyMFBase):
     
     The result is a set of coefficients nmf_mdl.H, s.t. data = W * nmf_mdl.H.
     """
-  
-    def update_h(self):
+ 
+    def _update_h(self):
         def updatesingleH(i):
             # optimize alpha using qp solver from cvxopt
             FA = base.matrix(np.float64(np.dot(-self.W.T, self.data[:,i])))
@@ -76,7 +76,7 @@ class NMFALS(PyMFBase):
         map(updatesingleH, xrange(self._num_samples))                        
             
                 
-    def update_w(self):
+    def _update_w(self):
         def updatesingleW(i):
         # optimize alpha using qp solver from cvxopt
             FA = base.matrix(np.float64(np.dot(-self.H, self.data[i,:].T)))
@@ -89,6 +89,8 @@ class NMFALS(PyMFBase):
         INQb = base.matrix(0.0, (self._num_bases,1))            
 
         map(updatesingleW, xrange(self._data_dimension))
+
+        self.W = self.W/np.sum(self.W, axis=1)
 
 def _test():
     import doctest

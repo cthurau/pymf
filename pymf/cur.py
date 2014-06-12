@@ -11,12 +11,13 @@ a Compressed Approixmate Matrix Decomposition', SIAM J. Computing 36(1), 184-206
 import numpy as np
 import scipy.sparse
 
-from svd import pinv, SVD
+from svd import pinv
+from base import PyMFBase3
 
 
 __all__ = ["CUR"]
 
-class CUR(SVD):
+class CUR(PyMFBase3):
     """      
     CUR(data,  data, k=-1, rrank=0, crank=0)
         
@@ -52,7 +53,11 @@ class CUR(SVD):
     """
     
     def __init__(self, data, k=-1, rrank=0, crank=0):
-        SVD.__init__(self, data,k=k,rrank=rrank, crank=rrank)
+        """
+        Parameters
+        ----------
+        """
+        PyMFBase3.__init__(self, data,k=k,rrank=rrank, crank=rrank)
         
         # select all data samples for computing the error:
         # note that this might take very long, adjust self._rset and self._cset 
@@ -62,6 +67,13 @@ class CUR(SVD):
 
         
     def sample(self, s, probs):        
+        """
+        Parameters
+        ----------
+
+        Returns
+        -------
+        """
         prob_rows = np.cumsum(probs.flatten())            
         temp_ind = np.zeros(s, np.int32)
     
@@ -77,7 +89,13 @@ class CUR(SVD):
         return np.sort(temp_ind)
         
     def sample_probability(self):
-        
+        """
+        Parameters
+        ----------
+
+        Returns
+        -------
+        """
         if scipy.sparse.issparse(self.data):
             dsquare = self.data.multiply(self.data)    
         else:
@@ -92,6 +110,13 @@ class CUR(SVD):
         return (prow.reshape(-1,1), pcol.reshape(-1,1))
                             
     def computeUCR(self):                
+        """
+        Parameters
+        ----------
+
+        Returns
+        -------
+        """
         # the next  lines do NOT work with h5py if CUR is used -> double indices in self.cid or self.rid
         # can occur and are not supported by h5py. When using h5py data, always use CMD which ignores
         # reoccuring row/column selections.
@@ -103,8 +128,9 @@ class CUR(SVD):
             self._U = pinv(self._C, self._k) * self.data[:,:] * pinv(self._R, self._k)
                      
         else:        
-            self._C = np.dot(self.data[:, self._cid].reshape((self._rows, len(self._cid))), np.diag(self._ccnt**(1/2)))        
-            self._R = np.dot(np.diag(self._rcnt**(1/2)), self.data[self._rid,:].reshape((len(self._rid), self._cols)))
+            self._C = np.dot(self.data[:, self._cid].reshape((self._rows, -1)), np.diag(self._ccnt**(1/2)))        
+            self._R = np.dot(np.diag(self._rcnt**(1/2)), 
+                self.data[self._rid,:].reshape((-1, self._cols)))
 
             self._U = np.dot(np.dot(pinv(self._C, self._k), self.data[:,:]), 
                              pinv(self._R, self._k))
@@ -117,11 +143,11 @@ class CUR(SVD):
     def factorize(self):
         """ Factorize s.t. CUR = data
             
-            Updated Values
-            --------------
-            .C : updated values for C.
-            .U : updated values for U.
-            .R : updated values for R.           
+        Updated Values
+        --------------
+        .C : updated values for C.
+        .U : updated values for U.
+        .R : updated values for R.           
         """          
         [prow, pcol] = self.sample_probability()
         self._rid = self.sample(self._rrank, prow)

@@ -63,16 +63,13 @@ class NNDSVD(PyMFBase):
 
     The result is a set of (more optimal) coefficients nmf_mdl.H, nmf_mdl.W.
     """                
-    def init_w(self):
+    def _init_w(self):
         self.W = np.zeros((self._data_dimension, self._num_bases))
                        
-    def init_h(self):
+    def _init_h(self):
         self.H = np.zeros((self._num_bases, self._num_samples))
         
-    def update_h(self):
-        pass
-
-    def update_w(self):
+    def _update_w(self):
         svd_mdl = SVD(self.data)
         svd_mdl.factorize()
         

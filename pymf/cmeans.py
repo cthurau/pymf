@@ -60,7 +60,7 @@ class Cmeans(PyMFBase):
     The result is a set of coefficients kmeans_mdl.H, s.t. data = W * kmeans_mdl.H.
     """
 
-    def update_h(self):                    
+    def _update_h(self):                    
         # assign samples to best matching centres ...
         m = 1.75
         tmp_dist = dist.pdist(self.W, self.data, metric='l2') + self._EPS
@@ -72,7 +72,7 @@ class Cmeans(PyMFBase):
             
         self.H = np.where(self.H>0, 1.0/self.H, 0)    
                     
-    def update_w(self):            
+    def _update_w(self):            
         for i in range(self._num_bases):
             tmp = (self.H[i:i+1,:] * self.data).sum(axis=1)
             self.W[:,i] = tmp/(self.H[i,:].sum() + self._EPS)        

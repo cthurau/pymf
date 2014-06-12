@@ -10,7 +10,9 @@ PyMF Non-negative Matrix Factorization.
 Matrix Factorization, Nature 401(6755), 788-799.
 """
 import scipy.optimize
+import numpy as np
 from base import PyMFBase
+from svd import pinv
 
 __all__ = ["NMFNNLS"]
 
@@ -60,17 +62,17 @@ class NMFNNLS(PyMFBase):
     The result is a set of coefficients nmf_mdl.H, s.t. data = W * nmf_mdl.H.
     """
 
-    def update_h(self):
+    def _update_h(self):
         def updatesingleH(i):        
             self.H[:,i] = scipy.optimize.nnls(self.W, self.data[:,i])[0]
                                                                             
         map(updatesingleH, xrange(self._num_samples))                        
             
                 
-    def update_w(self):
+    def _update_w(self):
         def updatesingleW(i):            
             self.W[i,:] = scipy.optimize.nnls(self.H.T, self.data[i,:].T)[0]
-                
+
         map(updatesingleW, xrange(self._data_dimension))
 
 def _test():

@@ -53,6 +53,13 @@ class GREEDYCUR(CUR):
     '''
 
     def sample(self, A, c):
+        """
+        Arguments
+        ---------
+
+        Returns
+        -------
+        """
         # set k to a value lower than the number of bases, usually
         # gives better results.
         k = np.round(c - c/5.0)
@@ -62,6 +69,8 @@ class GREEDYCUR(CUR):
             
             
     def factorize(self):
+        """
+        """
         # sample row and column indices that maximize the volume of the submatrix
         self._rid = self.sample(self.data.transpose(), self._rrank)
         self._cid = self.sample(self.data, self._crank)

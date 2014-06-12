@@ -46,7 +46,7 @@ class RNMF(PyMFBase):
 
     >>> import numpy as np
     >>> data = np.array([[1.0, 0.0, 2.0], [0.0, 1.0, 1.0]])
-    >>> nmf_mdl = NMF(data, num_bases=2, niter=10)
+    >>> nmf_mdl = RNMF(data, num_bases=2)
     >>> nmf_mdl.factorize()
 
     The basis vectors are now stored in nmf_mdl.W, the coefficients in nmf_mdl.H.
@@ -55,7 +55,7 @@ class RNMF(PyMFBase):
 
     >>> data = np.array([[1.5], [1.2]])
     >>> W = np.array([[1.0, 0.0], [0.0, 1.0]])
-    >>> nmf_mdl = NMF(data, num_bases=2)
+    >>> nmf_mdl = RNMF(data, num_bases=2)
     >>> nmf_mdl.W = W
     >>> nmf_mdl.factorize(niter=20, compute_w=False)
 
@@ -64,7 +64,7 @@ class RNMF(PyMFBase):
     
     def __init__(self, data, num_bases=4, lamb=2.0):
         # call inherited method
-        NMF.__init__(self, data, num_bases=num_bases)
+        PyMFBase.__init__(self, data, num_bases=num_bases)
         self._lamb = lamb
     
     def soft_thresholding(self, X, lamb):       
@@ -73,12 +73,10 @@ class RNMF(PyMFBase):
         X = np.where(X < -1.0*lamb, X + lamb, X)
         return X
         
-    def init_w(self):
-        self.W = np.random.random((self._data_dimension, self._num_bases))             
-                        
-    def init_h(self):
+    def _init_h(self):
         self.H = np.random.random((self._num_bases, self._num_samples))
         self.H[:,:] = 1.0
+
         # normalized bases
         Wnorm = np.sqrt(np.sum(self.W**2.0, axis=0))
         self.W /= Wnorm
@@ -88,11 +86,11 @@ class RNMF(PyMFBase):
             
         self.update_s()
         
-    def update_s(self):                
+    def _update_s(self):                
         self.S = self.data - np.dot(self.W, self.H)
         self.S = self.soft_thresholding(self.S, self._lamb)
     
-    def update_h(self):
+    def _update_h(self):
         # pre init H1, and H2 (necessary for storing matrices on disk)
         H1 = np.dot(self.W.T, self.S - self.data)
         H1 = np.abs(H1) - H1
@@ -102,7 +100,7 @@ class RNMF(PyMFBase):
         # adapt S
         self.update_s()
   
-    def update_w(self):
+    def _update_w(self):
         # pre init W1, and W2 (necessary for storing matrices on disk)
         W1 = np.dot(self.S - self.data, self.H.T)
         #W1 = np.dot(self.data - self.S, self.H.T)       

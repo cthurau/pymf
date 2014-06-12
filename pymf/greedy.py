@@ -73,13 +73,13 @@ class GREEDY(PyMFBase):
         if self._k == -1:
             self._k = num_bases
 
-    def update_h(self):
+    def _update_h(self):
         if scipy.sparse.issparse(self.data):
             self.H = pinv(self.W) * self.data
         else:
             self.H = np.dot(pinv(self.W), self.data)
         
-    def update_w(self):
+    def _update_w(self):
         def normalize_matrix(K):
             """ Normalize a matrix K s.t. columns have Euclidean-norm |1|
             """

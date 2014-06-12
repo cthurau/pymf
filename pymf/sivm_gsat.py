@@ -70,11 +70,11 @@ class SIVM_GSAT(SIVM):
     The result is a set of coefficients sivm_mdl.H, s.t. data = W * sivm_mdl.H.
     """
 
-    def init_w(self):
+    def _init_w(self):
         self.select = range(self._num_bases)
         self.W = self.data[:, self.select]
         
-    def online_update_w(self, vec):
+    def _online_update_w(self, vec):
         # update D if it does not exist   
         k = self._num_bases
         if not hasattr(self, 'D'):
@@ -111,10 +111,10 @@ class SIVM_GSAT(SIVM):
             
         return False,-1
         
-    def update_w(self): 
+    def _update_w(self): 
         n = np.int(np.floor(np.random.random() * self._num_samples))
         if n not in self.select:
-            updated, s = self.online_update_w(self.data[:,n])
+            updated, s = self._online_update_w(self.data[:,n])
             if updated:
                 self.select[s] = n    
                 self._logger.info('Current selection:' + str(self.select))
@@ -152,28 +152,27 @@ class SIVM_GSAT(SIVM):
         # create W and H if they don't already exist
         # -> any custom initialization to W,H should be done before
         if not hasattr(self,'W'):
-               self.init_w()
+               self._init_w()
                
         if not hasattr(self,'H'):
-                self.init_h()                   
+                self._init_h()                   
 
         if compute_err:
             self.ferr = np.zeros(niter)
              
         for i in xrange(niter):
             if compute_w:
-                self.update_w()
+                self._update_w()
 
             if compute_h:
-                self.update_h()                                        
+                self._update_h()                                        
              
             if compute_err:                 
-                self.ferr[i] = self.frobenius_norm()
-                self._logger.info('Iteration ' + str(i+1) + '/' + str(niter) + 
-                    ' FN:' + str(self.ferr[i]))
+                self.ferr[i] = self.frobenius_norm()                
+                self._logger.info('FN: %s (%s/%s)'  %(ferr[i], i+1, niter))
             else:                
-                self._logger.info('Iteration ' + str(i+1) + '/' + str(niter))
-
+                self._logger.info('Iteration: (%s/%s)'  %(i+1, niter))
+         
 def _test():
     import doctest
     doctest.testmod()

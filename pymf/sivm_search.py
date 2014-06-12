@@ -71,7 +71,7 @@ class SIVM_SEARCH(SIVM):
     The result is a set of coefficients sivm_mdl.H, s.t. data = W * sivm_mdl.H.
     """
     
-    def update_w(self):
+    def _update_w(self):
         
         def h(sel, D, k):
             # compute the volume for a selection of sel columns
