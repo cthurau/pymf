@@ -13,7 +13,7 @@ import numpy as np
 import time
 
 from dist import *
-from vol import *
+from base import *
 from sivm_search import SIVM_SEARCH
 
 __all__ = ["SIVM_SGREEDY"]

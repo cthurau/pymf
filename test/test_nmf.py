@@ -1,6 +1,4 @@
-from pymf.nmf import NMF
-from pymf.nmfals import NMFALS
-from pymf.nmfnnls import NMFNNLS
+from pymf.nmf import *
 import numpy as np
 from numpy.testing import *
 from base import *
