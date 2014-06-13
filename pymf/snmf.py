@@ -18,7 +18,8 @@ class SNMF(PyMFBase):
     SNMF(data, num_bases=4)
     
     Semi Non-negative Matrix Factorization. Factorize a data matrix into two 
-    matrices s.t. F = | data - W*H | is minimal.
+    matrices s.t. F = | data - W*H | is minimal. For Semi-NMF only H is 
+    constrained to non-negativity.
     
     Parameters
     ----------
@@ -79,7 +80,7 @@ class SNMF(PyMFBase):
         H1 = (XW_pos + np.dot(self.H.T, WW_neg)).T
         
         XW_neg = separate_negative(XW)
-        H2 = (XW_neg + np.dot(self.H.T,WW_pos)).T + 10**-9
+        H2 = (XW_neg + np.dot(self.H.T, WW_pos)).T + 10**-9
         
         self.H *= np.sqrt(H1/H2)    
 

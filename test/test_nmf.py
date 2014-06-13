@@ -27,6 +27,17 @@ class TestNMF():
         rec = mdl.frobenius_norm()
         assert_almost_equal(0.0, rec, decimal=1)
 
+    def test_rnmf(self):
+        mdl = RNMF(self.data, num_bases=2)
+
+        # nmf forms a cone in the input space, but it is unlikely to hit the
+        # cone exactly.
+        mdl.factorize(niter=50)
+        assert_set_equal(mdl.W.T/np.sum(mdl.W, axis=1), self.W, decimal=1)
+
+        # the reconstruction quality should still be close to perfect
+        rec = mdl.frobenius_norm()
+        assert_almost_equal(0.0, rec, decimal=1)
 
     def test_nmfals(self):
         # (todo) based on the initialization this test can fail

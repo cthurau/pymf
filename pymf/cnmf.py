@@ -8,12 +8,10 @@ PyMF Convex Matrix Factorization [1]
 [1] Ding, C., Li, T. and Jordan, M.. Convex and Semi-Nonnegative Matrix Factorizations.
 IEEE Trans. on Pattern Analysis and Machine Intelligence 32(1), 45-55.
 """
-
 import numpy as np
 import logging
 from kmeans import Kmeans
 from base import PyMFBase
-
 
 __all__ = ["CNMF"]
 
@@ -167,7 +165,7 @@ class CNMF(PyMFBase):
                                 
             if compute_err:                 
                 self.ferr[i] = self.frobenius_norm()
-                self._logger.info('FN: %s (%s/%s)'  %(ferr[i], i+1, niter))
+                self._logger.info('FN: %s (%s/%s)'  %(self.ferr[i], i+1, niter))
             else:                
                 self._logger.info('Iteration: (%s/%s)'  %(i+1, niter))
 

@@ -56,9 +56,13 @@ class GREEDYCUR(CUR):
         """
         Arguments
         ---------
+        A :
+        c :
 
         Returns
         -------
+        s : selection of samples/indices
+
         """
         # set k to a value lower than the number of bases, usually
         # gives better results.

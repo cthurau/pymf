@@ -1,8 +1,10 @@
 # Authors: Christian Thurau
 # License: BSD 3 Clause
 """
-PyMF K-means clustering (unary-convex matrix factorization).
-Copyright (C) Christian Thurau, 2010. GNU General Public License (GPL). 
+PyMF C-means [1] clustering (unary-convex matrix factorization).
+
+[1] J.C. Bezdek. Pattern recognition with fuzzy objective function algorithms. 
+Plenum Press, New York 1981.
 """
 import numpy as np
 
@@ -18,7 +20,7 @@ class Cmeans(PyMFBase):
     
     Fuzzy c-means soft clustering. Factorize a data matrix into two matrices s.t.
     F = | data - W*H | is minimal. H is restricted to convexity (columns
-    sum to 1) W    is simply the weighted mean over the corresponding samples in 
+    sum to 1) W is simply the weighted mean over the corresponding samples in 
     data. Note that the objective function is based on distances (?), hence the
     Frobenius norm is probably not a good quality measure.
     

@@ -2,7 +2,12 @@
 # License: BSD 3 Clause
 
 """ 
-PyMF LAESA
+PyMF SIVM-LAESA based factorization in which the simplex is constructed using
+the LAESA[1] algorithm, coefficients are computed in a standard SIVM/AA fashion.
+
+[1] Maria Luisa Mico , J. Oncina , Enrique Vidal. A new version of the nearest-
+neighbour approximating and eliminating search algorithm with linear 
+preprocessing-time and memory requirements. Pattern Recognition Letters 1994.
 """
 import scipy.sparse
 import numpy as np
@@ -45,7 +50,7 @@ class LAESA(SIVM):
     >>> laesa_mdl.factorize()
     
     The basis vectors are now stored in laesa_mdl.W, the coefficients in laesa_mdl.H. 
-    To compute coefficients for an existing set of basis vectors simply    copy W 
+    To compute coefficients for an existing set of basis vectors simply copy W 
     to laesa_mdl.W, and set compute_w to False:
     
     >>> data = np.array([[1.5, 1.3], [1.2, 0.3]])
@@ -58,7 +63,7 @@ class LAESA(SIVM):
     """
     def _update_w(self):    
         # initialize some of the recursively updated distance measures     
-        self.init_sivm()
+        self._init_sivm()
         distiter = self._distance(self.select[-1])                
         
         for l in range(self._num_bases-1):                                        

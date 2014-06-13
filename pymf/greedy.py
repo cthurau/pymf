@@ -5,7 +5,6 @@ PyMF GREEDY[1]
 
 	GREEDY: class for a deterministic SVD based greedy matrix reconstruction [1].
 
-
 [1] Ali Civril, Malik Magdon-Ismail. Deterministic Sparse Column Based Matrix
 Reconstruction via Greedy Approximation of SVD. ISAAC'2008.
 """
@@ -20,7 +19,6 @@ __all__ = ["GREEDY"]
 class GREEDY(PyMFBase):
     """ 
     GREEDYVOL(data, num_bases=4, niter=100, show_progress=True, compW=True)
-
 
     Deterministic Sparse Column Based Matrix Reconstruction via Greedy 
     Approximation of SVD. Factorize a data matrix into two matrices s.t.
@@ -64,7 +62,6 @@ class GREEDY(PyMFBase):
 
     The result is a set of coefficients greedy_mdl.H, s.t. data = W * greedy_mdl.H.
     """
-
 
     def __init__(self, data, k=-1, num_bases=4):
         # call inherited method
