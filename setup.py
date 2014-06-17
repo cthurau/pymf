@@ -2,7 +2,7 @@ import os
 from setuptools import setup
 
 setup(name='PyMF',
-      version='0.2',
+      version='0.3',
       description='Python Matrix Factorization Module',
       author='Christian Thurau',
       author_email='cthurau@googlemail.com',
